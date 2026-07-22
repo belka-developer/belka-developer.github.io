@@ -268,6 +268,37 @@
     opacity:.55;
   }
 
+  /* --- кнопка прямой связи: тише соцсетей, пунктирная рамка --- */
+  .feedback-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    margin-top:18px;
+    padding:11px 16px;
+    border-radius:12px;
+    border:1px dashed rgba(255,255,255,0.22);
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-family:"Outfit", sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.01em;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .feedback-btn .link-icon{
+    width:16px;
+    height:16px;
+    color:currentColor;
+  }
+  .feedback-btn:hover,
+  .feedback-btn:focus-visible{
+    border-color:var(--cyan);
+    color:var(--ink);
+    background:rgba(255,255,255,0.04);
+  }
+  .feedback-btn:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+
   @media (max-width:380px){
     .card{ padding:28px 18px 22px; }
     .avatar-wrap{ width:104px; height:104px; }
@@ -294,6 +325,11 @@
 
   <ul class="links" id="links-list"></ul>
 
+  <a class="feedback-btn" href="mailto:feedback.belka@outlook.com">
+    <span class="link-icon" id="feedback-icon"></span>
+    <span>Написать напрямую</span>
+  </a>
+
   <footer>connect · 2026</footer>
 </main>
 
@@ -306,25 +342,18 @@
        | "twitter" | "twitch" | "vk" | "link"
    ============================================================ */
 const LINKS = [
-  { name: "GitHub",         url: "https://github.com/belka-developer", icon: "tiktok",   color: "#e8779c" },
+  { name: "GitHub",         url: "https://github.com/belka-developer", icon: "github",   color: "#e6e6e6" },
   { name: "Discord сервер", url: "https://discord.gg/dw65R5Mvft",   icon: "discord",  color: "#9a7cd6" },
   { name: "TikTok",         url: "https://www.tiktok.com/@haus_soda", icon: "tiktok",   color: "#e8779c" },
   { name: "Telegram канал", url: "https://t.me/norka_belki",          icon: "telegram", color: "#5fc9c2" },
 ];
 
-/* ============================================================
-   🖼️ СТИКЕРЫ-ПЕРСОНАЖИ — декоративные PNG по бокам карточки.
-   Положи свои файлы (с прозрачным фоном) рядом с index.html
-   и пропиши их имена ниже — например asuna.png, senko.png, marin.png.
-   Если файла нет — стикер просто не покажется.
-   ============================================================ */
-const STICKERS = [
-  { src: "asuna.png",  height: 520, top: "10%", left: "3%",  rotate: -4 },
-  { src: "senko.png",  height: 420, top: "50%", left: "1%",  rotate: 3  },
-  { src: "marin.png",  height: 520, top: "14%", left: "auto", right: "3%", rotate: 4 },
-];
+/* Стикеры-персонажи больше не используются */
+const STICKERS = [];
 
 const ICONS = {
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>',
+  github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.6.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.4-3.4-1.4-.4-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1.1 1.5 1.1.9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 22 12.2C22 6.6 17.5 2 12 2z"/></svg>',
   tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.2 2 3.9 4.4 4.2v3c-1.6 0-3.1-.5-4.4-1.4v6.8c0 3.5-2.8 6.4-6.4 6.4S3.7 18.1 3.7 14.6c0-3.4 2.6-6.1 6-6.4v3.1c-1.6.3-2.9 1.7-2.9 3.3 0 1.9 1.5 3.4 3.4 3.4s3.4-1.5 3.4-3.4V3h2.9z"/></svg>',
   discord: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 5.4C18.9 4.7 17.4 4.2 15.9 4c-.2.4-.4.8-.6 1.3-1.6-.2-3.2-.2-4.8 0-.1-.5-.3-.9-.6-1.3-1.5.2-3 .7-4.4 1.4C2.9 9 2.2 12.5 2.5 16c1.7 1.3 3.3 2 4.9 2.5.4-.5.7-1.1 1-1.7-.6-.2-1.1-.5-1.6-.8.1-.1.3-.2.4-.3 3.1 1.4 6.4 1.4 9.4 0 .1.1.3.2.4.3-.5.3-1.1.6-1.6.8.3.6.6 1.2 1 1.7 1.6-.5 3.2-1.2 4.9-2.5.4-4-.6-7.5-2.5-10.6zM9.3 13.8c-.9 0-1.7-.9-1.7-1.9s.7-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9zm5.4 0c-.9 0-1.7-.9-1.7-1.9s.7-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9z"/></svg>',
   telegram: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6 18.6 20c-.2 1-1 1.2-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1L18.4 6.6c.4-.4-.1-.6-.6-.2L6.7 13.6l-5-1.6c-1-.3-1-1 .2-1.5L20.6 3.6c.9-.3 1.6.2 1.3 1z"/></svg>',
@@ -353,6 +382,7 @@ function renderLinks(){
   });
 }
 renderLinks();
+document.getElementById('feedback-icon').innerHTML = ICONS.mail;
 
 function renderStickers(){
   const wrap = document.getElementById('stickers');
