@@ -3,33 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>にじの部屋 — мои ссылки</title>
+<title>links.// にじ</title>
 <meta name="description" content="Мои соцсети и ссылки">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   /* ============================================================
-     🌸 НАСТРОЙКИ ССЫЛОК — редактируй только этот блок в JS ниже
-     Ищи объект LINKS в конце файла (перед </body>)
+     🔗 ССЫЛКИ настраиваются в JS внизу файла (объект LINKS)
+     🖼️ СТИКЕРЫ-ПЕРСОНАЖИ настраиваются в объекте STICKERS там же
      ============================================================ */
 
   :root{
-    --bg-0:#150c22;
-    --bg-1:#241536;
-    --bg-2:#341b45;
-    --ink:#f7ecf9;
-    --ink-soft:#cdb9dd;
-    --pink:#ff8fb3;
-    --pink-deep:#ff5f96;
-    --lav:#b48cf0;
-    --cyan:#7de8e0;
-    --card-bg:rgba(35,22,52,0.55);
-    --card-border:rgba(255,255,255,0.14);
-    --radius:26px;
-    --shadow: 0 20px 60px rgba(10,4,20,0.55);
+    --bg-0:#120c1c;
+    --bg-1:#1d1530;
+    --bg-2:#261a38;
+    --ink:#f1ecf5;
+    --ink-soft:#a99cbd;
+    --pink:#e8779c;
+    --lav:#9a7cd6;
+    --cyan:#5fc9c2;
+    --card-bg:rgba(26,18,40,0.62);
+    --card-border:rgba(255,255,255,0.10);
+    --radius:16px;
+    --shadow: 0 24px 60px rgba(6,3,14,0.6);
   }
 
   *{box-sizing:border-box;}
@@ -39,10 +38,13 @@
     min-height:100svh;
     min-height:100vh;
     background:
-      radial-gradient(ellipse 90% 60% at 20% -10%, rgba(255,143,179,0.20), transparent 60%),
-      radial-gradient(ellipse 80% 60% at 100% 10%, rgba(125,232,224,0.14), transparent 55%),
-      radial-gradient(ellipse 70% 60% at 50% 120%, rgba(180,140,240,0.22), transparent 60%),
-      linear-gradient(160deg, var(--bg-0), var(--bg-1) 55%, var(--bg-2));
+      radial-gradient(ellipse 80% 55% at 15% -5%, rgba(232,119,156,0.10), transparent 60%),
+      radial-gradient(ellipse 70% 55% at 100% 10%, rgba(95,201,194,0.07), transparent 55%),
+      linear-gradient(180deg, rgba(10,6,16,0.55), rgba(14,9,22,0.72) 55%, rgba(10,6,16,0.85)),
+      url("https://i.pinimg.com/736x/71/1d/54/711d54d467bc67042ef26b3e5ac74e51.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
     font-family:"Nunito", sans-serif;
     color:var(--ink);
@@ -54,7 +56,7 @@
     overflow-x:hidden;
   }
 
-  /* --- лепестки сакуры (ambient motion) --- */
+  /* --- лепестки: реже и тише --- */
   #petals{
     position:fixed;
     inset:0;
@@ -65,75 +67,98 @@
   .petal{
     position:absolute;
     top:-10%;
-    width:16px;
-    height:16px;
-    opacity:.75;
+    width:11px;
+    height:11px;
+    opacity:.4;
     will-change:transform;
     animation:fall linear infinite;
   }
   .petal svg{width:100%;height:100%;display:block;}
   @keyframes fall{
     0%{ transform:translate3d(0,-10vh,0) rotate(0deg); }
-    100%{ transform:translate3d(var(--drift,40px), 110vh, 0) rotate(360deg); }
+    100%{ transform:translate3d(var(--drift,30px), 110vh, 0) rotate(220deg); }
   }
   @media (prefers-reduced-motion: reduce){
     .petal{animation:none; display:none;}
   }
 
-  /* --- карточка --- */
+  /* --- стикеры персонажей вокруг карточки --- */
+  #stickers{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+  }
+  .sticker{
+    position:absolute;
+    filter:drop-shadow(0 14px 26px rgba(0,0,0,0.5)) saturate(0.94);
+    animation:hover-float 6s ease-in-out infinite;
+    opacity:.92;
+  }
+  .sticker img{
+    display:block;
+    height:100%;
+    width:auto;
+  }
+  @keyframes hover-float{
+    0%,100%{ transform:translateY(0) rotate(var(--rot,0deg)); }
+    50%{ transform:translateY(-12px) rotate(var(--rot,0deg)); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sticker{animation:none;}
+  }
+  @media (max-width:900px){
+    .sticker{ display:none; }
+  }
+
+  /* --- карточка: скругления скромнее, рамка тише --- */
   .card{
     position:relative;
     z-index:1;
     width:100%;
-    max-width:400px;
+    max-width:396px;
     background:var(--card-bg);
     border:1px solid var(--card-border);
     border-radius:var(--radius);
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
     box-shadow:var(--shadow);
-    padding:38px 26px 30px;
+    padding:36px 26px 26px;
     text-align:center;
     isolation:isolate;
   }
 
-  /* мерцающая радужная рамка-обводка */
   .card::before{
     content:"";
     position:absolute;
-    inset:-1.5px;
-    border-radius:calc(var(--radius) + 1.5px);
-    padding:1.5px;
-    background:conic-gradient(from var(--ang,0deg), var(--pink), var(--lav), var(--cyan), var(--pink));
+    inset:-1px;
+    border-radius:calc(var(--radius) + 1px);
+    padding:1px;
+    background:linear-gradient(135deg, var(--pink), var(--lav) 55%, var(--cyan));
     -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     z-index:-1;
-    opacity:.55;
-    animation:spin 7s linear infinite;
+    opacity:.35;
   }
-  @keyframes spin{ to{ --ang:360deg; } }
-  @property --ang{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
 
-  /* --- аватар --- */
+  /* --- аватар: тоньше кольцо, без блёсток --- */
   .avatar-wrap{
     position:relative;
-    width:132px;
-    height:132px;
+    width:120px;
+    height:120px;
     margin:0 auto 18px;
   }
   .avatar-ring{
     position:absolute;
-    inset:-8px;
+    inset:-4px;
     border-radius:50%;
     background:conic-gradient(from 0deg, var(--pink), var(--cyan), var(--lav), var(--pink));
-    animation:spin-ring 6s linear infinite;
-    filter:blur(0.3px);
+    opacity:.75;
   }
-  @keyframes spin-ring{ to{ transform:rotate(360deg); } }
   .avatar-inner{
     position:absolute;
-    inset:6px;
+    inset:4px;
     border-radius:50%;
     background:var(--bg-1);
     overflow:hidden;
@@ -148,44 +173,33 @@
     display:block;
   }
   .avatar-inner .fallback{
-    font-size:52px;
-  }
-  .sparkle{
-    position:absolute;
-    font-size:20px;
-    animation:twinkle 2.4s ease-in-out infinite;
-    filter:drop-shadow(0 0 6px rgba(255,255,255,.6));
-  }
-  .sparkle.s1{ top:-2px; right:2px; animation-delay:0s; }
-  .sparkle.s2{ bottom:6px; left:-10px; font-size:14px; animation-delay:.8s; }
-  @keyframes twinkle{
-    0%,100%{ transform:scale(0.8); opacity:.5; }
-    50%{ transform:scale(1.15); opacity:1; }
+    font-size:44px;
+    opacity:.85;
   }
 
   .name{
-    font-family:"Zen Maru Gothic", sans-serif;
-    font-weight:900;
-    font-size:24px;
-    letter-spacing:.02em;
-    margin:2px 0 4px;
-    background:linear-gradient(90deg, var(--pink), var(--lav) 55%, var(--cyan));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    font-family:"Outfit", sans-serif;
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:.01em;
+    margin:0 0 6px;
+    color:var(--ink);
+  }
+  .name .accent{
+    color:var(--pink);
   }
   .tagline{
-    font-size:14.5px;
+    font-size:13.5px;
     color:var(--ink-soft);
     margin:0 0 26px;
-    line-height:1.5;
+    line-height:1.55;
   }
 
-  /* --- список ссылок --- */
+  /* --- список ссылок: спокойнее hover, меньше скругление --- */
   .links{
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:10px;
     list-style:none;
     padding:0;
     margin:0;
@@ -195,16 +209,16 @@
     display:flex;
     align-items:center;
     gap:12px;
-    padding:14px 18px;
-    border-radius:16px;
+    padding:13px 17px;
+    border-radius:12px;
     text-decoration:none;
     color:var(--ink);
-    font-weight:700;
-    font-size:15px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
-    border:1px solid rgba(255,255,255,0.12);
+    font-weight:600;
+    font-size:14.5px;
+    background:rgba(255,255,255,0.035);
+    border:1px solid rgba(255,255,255,0.09);
     overflow:hidden;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
   }
   .link-item a::before{
     content:"";
@@ -212,21 +226,22 @@
     inset:0;
     background:linear-gradient(90deg, var(--lc, var(--pink)), transparent 70%);
     opacity:0;
-    transition:opacity .18s ease;
+    transition:opacity .15s ease;
   }
   .link-item a:hover,
   .link-item a:focus-visible{
-    transform:translateY(-2px) scale(1.015);
+    transform:translateY(-1px);
     border-color:var(--lc, var(--pink));
-    box-shadow:0 10px 24px -8px var(--lc, var(--pink));
+    background:rgba(255,255,255,0.055);
+    box-shadow:0 8px 20px -10px var(--lc, var(--pink));
   }
   .link-item a:hover::before,
-  .link-item a:focus-visible::before{ opacity:.16; }
+  .link-item a:focus-visible::before{ opacity:.10; }
   .link-item a:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
 
   .link-icon{
-    width:26px;
-    height:26px;
+    width:23px;
+    height:23px;
     flex:0 0 auto;
     display:flex;
     align-items:center;
@@ -234,62 +249,78 @@
     color:var(--lc, var(--pink));
   }
   .link-icon svg{ width:100%; height:100%; }
-  .link-label{ flex:1; text-align:left; }
-  .link-arrow{ opacity:.55; font-size:13px; transform:translateX(0); transition:transform .18s ease; }
-  .link-item a:hover .link-arrow{ transform:translateX(3px); opacity:.9; }
+  .link-label{
+    flex:1;
+    text-align:left;
+    font-family:"Outfit", sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    letter-spacing:.01em;
+  }
+  .link-arrow{ opacity:.4; font-size:13px; transition:transform .15s ease, opacity .15s ease; }
+  .link-item a:hover .link-arrow{ transform:translateX(3px); opacity:.85; }
 
   footer{
-    margin-top:26px;
-    font-size:12px;
+    margin-top:24px;
+    font-size:11px;
+    letter-spacing:.06em;
     color:var(--ink-soft);
-    opacity:.7;
+    opacity:.55;
   }
-  footer span{ color:var(--pink); }
 
   @media (max-width:380px){
-    .card{ padding:30px 18px 24px; }
-    .avatar-wrap{ width:112px; height:112px; }
+    .card{ padding:28px 18px 22px; }
+    .avatar-wrap{ width:104px; height:104px; }
   }
 </style>
 </head>
 <body>
 
 <div id="petals"></div>
+<div id="stickers"></div>
 
 <main class="card">
   <div class="avatar-wrap">
     <div class="avatar-ring"></div>
     <div class="avatar-inner">
-      <!-- 🖼️ ЗАМЕНИ avatar.png на своё анимешное пнг-изображение (квадратное, лучше прозрачный фон) -->
+      <!-- 🖼️ Замени avatar.png на своё изображение (квадратное) -->
       <img src="avatar.png" alt="Аватар" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div class="fallback" style="display:none;">🌸</div>
+      <div class="fallback" style="display:none;">羽</div>
     </div>
-    <div class="sparkle s1">✨</div>
-    <div class="sparkle s2">⭐</div>
   </div>
 
-  <h1 class="name">твой ник тут</h1>
-  <p class="tagline">короткое описание себя<br>или девиз — сюда ✧</p>
+  <h1 class="name">твой <span class="accent">ник</span></h1>
+  <p class="tagline">короткая фраза о себе</p>
 
   <ul class="links" id="links-list"></ul>
 
-  <footer>сделано с <span>♥</span> в аниме-стиле</footer>
+  <footer>connect · 2026</footer>
 </main>
 
 <script>
 /* ============================================================
    🔗 ССЫЛКИ — редактируй только этот массив
-   Чтобы ДОБАВИТЬ ссылку — скопируй один объект { ... } и вставь
-   Чтобы УДАЛИТЬ ссылку — удали соответствующий объект { ... }
+   Добавить — скопируй один объект { ... } и вставь новый
+   Удалить — сотри соответствующий объект { ... }
    icon: "tiktok" | "discord" | "telegram" | "youtube" | "instagram"
-       | "twitter" | "twitch" | "vk" | "link" (универсальная иконка)
+       | "twitter" | "twitch" | "vk" | "link"
    ============================================================ */
 const LINKS = [
-  { name: "TikTok",        url: "https://www.tiktok.com/@твой_ник",     icon: "tiktok",   color: "#ff5f96" },
-  { name: "Discord сервер", url: "https://discord.gg/твой_инвайт",       icon: "discord",  color: "#7d8fff" },
-  { name: "Telegram канал", url: "https://t.me/твой_канал",              icon: "telegram", color: "#7de8e0" },
-  // { name: "YouTube", url: "https://youtube.com/@channel", icon: "youtube", color: "#ff5f5f" },
-  // { name: "Instagram", url: "https://instagram.com/username", icon: "instagram", color: "#e88cf0" },
+  { name: "TikTok",         url: "https://www.tiktok.com/@твой_ник", icon: "tiktok",   color: "#e8779c" },
+  { name: "Discord сервер", url: "https://discord.gg/твой_инвайт",   icon: "discord",  color: "#9a7cd6" },
+  { name: "Telegram канал", url: "https://t.me/твой_канал",          icon: "telegram", color: "#5fc9c2" },
+];
+
+/* ============================================================
+   🖼️ СТИКЕРЫ-ПЕРСОНАЖИ — декоративные PNG по бокам карточки.
+   Положи свои файлы (с прозрачным фоном) рядом с index.html
+   и пропиши их имена ниже — например asuna.png, senko.png, marin.png.
+   Если файла нет — стикер просто не покажется.
+   ============================================================ */
+const STICKERS = [
+  { src: "asuna.png",  height: 520, top: "10%", left: "3%",  rotate: -4 },
+  { src: "senko.png",  height: 420, top: "50%", left: "1%",  rotate: 3  },
+  { src: "marin.png",  height: 520, top: "14%", left: "auto", right: "3%", rotate: 4 },
 ];
 
 const ICONS = {
@@ -312,7 +343,7 @@ function renderLinks(){
     li.className = 'link-item';
     const iconSvg = ICONS[link.icon] || ICONS.link;
     li.innerHTML = `
-      <a href="${link.url}" target="_blank" rel="noopener noreferrer" style="--lc:${link.color || '#ff8fb3'}">
+      <a href="${link.url}" target="_blank" rel="noopener noreferrer" style="--lc:${link.color || '#e8779c'}">
         <span class="link-icon">${iconSvg}</span>
         <span class="link-label">${link.name}</span>
         <span class="link-arrow">→</span>
@@ -322,10 +353,35 @@ function renderLinks(){
 }
 renderLinks();
 
-/* лепестки сакуры */
+function renderStickers(){
+  const wrap = document.getElementById('stickers');
+  STICKERS.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'sticker';
+    div.style.top = s.top || '10%';
+    if (s.right !== undefined){
+      div.style.right = s.right;
+    } else {
+      div.style.left = s.left || '5%';
+    }
+    div.style.height = (s.height || 480) + 'px';
+    div.style.setProperty('--rot', (s.rotate || 0) + 'deg');
+    div.style.animationDelay = (i * 0.6) + 's';
+
+    const img = document.createElement('img');
+    img.src = s.src;
+    img.alt = '';
+    img.onerror = () => { div.style.display = 'none'; };
+    div.appendChild(img);
+    wrap.appendChild(div);
+  });
+}
+renderStickers();
+
+/* лепестки — тихий фон */
 (function petals(){
   const wrap = document.getElementById('petals');
-  const count = window.innerWidth < 500 ? 10 : 16;
+  const count = window.innerWidth < 500 ? 6 : 10;
   const petalSvg = '<svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 0C10 6 14 8 20 10c-6 2-10 4-10 10C10 14 6 12 0 10c6-2 10-4 10-10z"/></svg>';
   const colors = ['var(--pink)','var(--lav)','var(--cyan)'];
   for(let i=0;i<count;i++){
@@ -333,13 +389,13 @@ renderLinks();
     p.className = 'petal';
     p.style.left = Math.random()*100 + 'vw';
     p.style.color = colors[i % colors.length];
-    p.style.opacity = (0.4 + Math.random()*0.4).toFixed(2);
-    const size = 10 + Math.random()*10;
+    p.style.opacity = (0.25 + Math.random()*0.25).toFixed(2);
+    const size = 8 + Math.random()*7;
     p.style.width = size + 'px';
     p.style.height = size + 'px';
-    p.style.setProperty('--drift', (Math.random()*120 - 60) + 'px');
-    p.style.animationDuration = (9 + Math.random()*10) + 's';
-    p.style.animationDelay = (Math.random()*10) + 's';
+    p.style.setProperty('--drift', (Math.random()*80 - 40) + 'px');
+    p.style.animationDuration = (11 + Math.random()*10) + 's';
+    p.style.animationDelay = (Math.random()*12) + 's';
     p.innerHTML = petalSvg;
     wrap.appendChild(p);
   }
